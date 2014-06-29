@@ -1,39 +1,35 @@
-from copy import deepcopy
 import os
 from django.test import TestCase
+from django.test.utils import override_settings
 from template_explorer import utils
 from django.conf import settings
 
 
 class DirsFromSettingsTestCase(TestCase):
 
-    def setUp(self):
-        self.settings = deepcopy(settings)
-
+    @override_settings(TEMPLATE_LOADERS=('django.template.loaders.filesystem.Loader',))
     def test_settings_has_filesystem_loader(self):
-        self.settings.TEMPLATE_LOADERS = ('django.template.loaders.filesystem.Loader',)
-        found_dirs = utils.iter_template_dirs_from_settings(self.settings)
-        for dir in settings.TEMPLATE_DIRS:
-            self.assertIn(dir, list(found_dirs))
+        found_dirs = utils.iter_template_dirs_from_settings(settings)
+        for template_dir in settings.TEMPLATE_DIRS:
+            self.assertIn(template_dir, list(found_dirs))
 
+    @override_settings(TEMPLATE_LOADERS=tuple())
     def test_settings_has_no_filesystem_loader(self):
-        self.settings.TEMPLATE_LOADERS = tuple()
-        found_dirs = utils.iter_template_dirs_from_settings(self.settings)
+        found_dirs = utils.iter_template_dirs_from_settings(settings)
         self.assertEqual(list(found_dirs), [])
 
+    @override_settings(TEMPLATE_LOADERS=('django.template.loaders.app_directories.Loader',), INSTALLED_APPS=('tests',))
     def test_settings_has_app_directories_loader(self):
-        self.settings.TEMPLATE_LOADERS = ('django.template.loaders.app_directories.Loader',)
-        self.settings.INSTALLED_APPS = ('tests',)
-        found_dirs = utils.iter_template_dirs_from_settings(self.settings)
+        found_dirs = utils.iter_template_dirs_from_settings(settings)
         self.assertTrue(next(found_dirs).endswith(os.path.join('tests', 'templates')))
 
+    @override_settings(TEMPLATE_LOADERS=('django.template.loaders.app_directories.Loader',),
+                       INSTALLED_APPS=('tests.no_templates_app',))
     def test_settings_missing_app_template_directory(self):
-        self.settings.TEMPLATE_LOADERS = ('django.template.loaders.app_directories.Loader',)
-        self.settings.INSTALLED_APPS = ('tests.no_templates_app',)
-        found_dirs = utils.iter_template_dirs_from_settings(self.settings)
+        found_dirs = utils.iter_template_dirs_from_settings(settings)
         self.assertEqual(list(found_dirs), [])
 
+    @override_settings(TEMPLATE_LOADERS=tuple())
     def test_settings_has_no_app_directories_loader(self):
-        self.settings.TEMPLATE_LOADERS = tuple()
-        found_dirs = utils.iter_template_dirs_from_settings(self.settings)
+        found_dirs = utils.iter_template_dirs_from_settings(settings)
         self.assertEqual(list(found_dirs), [])

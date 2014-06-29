@@ -1,5 +1,5 @@
 import os
-from setuptools import setup, find_packages
+from setuptools import setup
 
 
 README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
@@ -11,7 +11,7 @@ setup(
     install_requires=[
         "Django>=1.4,<1.8",
     ],
-    packages=find_packages(exclude=["tests.*", "tests"]),
+    packages=["template_explorer"],
     include_package_data=True,
     test_suite='runtests.runtests',
     license='MIT License',

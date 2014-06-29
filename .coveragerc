@@ -1,0 +1,13 @@
+# .coveragerc to control coverage.py
+[run]
+include: template_explorer/*
+branch: True
+
+[report]
+exclude_lines:
+    pragma: no cover
+
+ignore_errors: True
+
+[html]
+directory: coverage_html_report
