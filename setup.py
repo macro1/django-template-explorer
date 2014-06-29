@@ -11,7 +11,7 @@ setup(
     install_requires=[
         "Django>=1.4,<1.8",
     ],
-    packages=["template_explorer"],
+    packages=["template_explorer", "template_explorer.management", "template_explorer.management.commands"],
     include_package_data=True,
     test_suite='runtests.runtests',
     license='MIT License',

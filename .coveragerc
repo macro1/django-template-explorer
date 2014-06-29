@@ -1,6 +1,6 @@
 # .coveragerc to control coverage.py
 [run]
-include: template_explorer/*
+source: template_explorer
 branch: True
 
 [report]
