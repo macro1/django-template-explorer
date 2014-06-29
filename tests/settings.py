@@ -2,7 +2,7 @@
 import os
 
 
-BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = "template_explorer_test_secret_key"
 
@@ -11,7 +11,7 @@ INSTALLED_APPS = [
 ]
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
+    os.path.join(BASE_DIR, 'tests', 'test_template_directory'),
 )
 
 TEMPLATE_LOADERS = (
