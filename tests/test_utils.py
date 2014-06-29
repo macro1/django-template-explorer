@@ -1,6 +1,7 @@
 import os
 from django.test import TestCase
 from django.test.utils import override_settings
+from django import template
 from template_explorer import utils
 from django.conf import settings
 
@@ -33,3 +34,14 @@ class DirsFromSettingsTestCase(TestCase):
     def test_settings_has_no_app_directories_loader(self):
         found_dirs = utils.iter_template_dirs_from_settings(settings)
         self.assertEqual(list(found_dirs), [])
+
+
+class TemplatesInDir(TestCase):
+
+    def test_returns_template(self):
+        for t in utils.iter_templates_from_path(settings.TEMPLATE_DIRS[0]):
+            self.assertIsInstance(t, template.Template)
+
+    def test_has_origin(self):
+        for t in utils.iter_templates_from_path(settings.TEMPLATE_DIRS[0]):
+            self.assertTrue(hasattr(t, 'origin'))
