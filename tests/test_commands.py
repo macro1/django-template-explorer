@@ -12,3 +12,13 @@ class TestTemplateDirectoryCommand(TestCase):
         management.call_command(self.command_name, stdout=out)
         self.assertIn("{base_dir}/tests/test_template_directory\n"
                       "{base_dir}/tests/templates".format(base_dir=settings.BASE_DIR), out.getvalue())
+
+
+class TestTemplateListCommand(TestCase):
+    command_name = 'template_list'
+
+    def test_lists_template(self):
+        out = StringIO()
+        management.call_command(self.command_name, stdout=out)
+        self.assertIn("{base_dir}/tests/test_template_directory/base.html".format(base_dir=settings.BASE_DIR),
+                      out.getvalue())

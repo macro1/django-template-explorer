@@ -2,6 +2,9 @@
 import os
 
 
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = "template_explorer_test_secret_key"
