@@ -7,6 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = "template_explorer_test_secret_key"
 
 INSTALLED_APPS = [
+    'template_explorer',
     'tests',
 ]
 
@@ -16,6 +17,7 @@ TEMPLATE_DIRS = (
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
 )
 
 DATABASES = {
