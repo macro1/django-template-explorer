@@ -22,3 +22,12 @@ class TestTemplateListCommand(TestCase):
         management.call_command(self.command_name, stdout=out)
         self.assertIn("{base_dir}/tests/test_template_directory/base.html".format(base_dir=settings.BASE_DIR),
                       out.getvalue())
+
+
+class TestTemplateTreeCommand(TestCase):
+    command_name = 'template_tree'
+
+    def test_line_count(self):
+        out = StringIO()
+        management.call_command(self.command_name, stdout=out)
+        self.assertEqual(set(out.getvalue().split("\n")), set(["tests/test_template.html", "base.html", ""]))
