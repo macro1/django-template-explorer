@@ -1,7 +1,5 @@
 import django
 from django.template import Template
-
-
 from django.conf import settings
 
 from ._base import NoArgsCommand
@@ -11,8 +9,6 @@ from ... import utils
 class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
-
-
         if django.VERSION < (1, 7):  # pragma: no cover
             # Monkey-patch versions of Django where Template doesn't store origin.
             # See https://code.djangoproject.com/ticket/16096.

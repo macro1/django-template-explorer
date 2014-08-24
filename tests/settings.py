@@ -14,14 +14,14 @@ INSTALLED_APPS = [
     'tests',
 ]
 
-TEMPLATE_DIRS = (
+TEMPLATE_DIRS = [
     os.path.join(BASE_DIR, 'tests', 'test_template_directory'),
-)
+]
 
-TEMPLATE_LOADERS = (
+TEMPLATE_LOADERS = [
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-)
+]
 
 DATABASES = {
     'default': {
@@ -29,3 +29,5 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+MIDDLEWARE_CLASSES = []
