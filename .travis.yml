@@ -2,7 +2,9 @@ language: python
 
 install: pip install $DJANGO --use-mirrors
 
-script: python setup.py test
+script:
+  - python -c 'from __future__ import print_function; import django; print("Django {0}".format(django.get_version()))'
+  - python setup.py test
 
 matrix:
   include:
