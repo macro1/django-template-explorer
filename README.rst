@@ -3,6 +3,7 @@ Template Explorer |build|
 =========================
 
 .. |build| image:: https://travis-ci.org/macro1/django-template-explorer.svg?branch=master
+           :target: https://travis-ci.org/macro1/django-template-explorer
 
 Template Explorer is a Django app to aid getting a handle on your
 project's templates.
