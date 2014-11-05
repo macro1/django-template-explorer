@@ -1,6 +1,6 @@
 language: python
 
-install: pip install $DJANGO --use-mirrors
+install: pip install $DJANGO
 
 script:
   - python -c 'from __future__ import print_function; import django; print("Django {0}".format(django.get_version()))'
